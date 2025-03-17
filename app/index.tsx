@@ -1,5 +1,6 @@
 import { StarryBackground } from '@/components/shooting-stars';
 import SimpleTypingText from '@/components/text-animation';
+import { router } from 'expo-router';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 
 const Welcome = () => {
@@ -21,7 +22,10 @@ const Welcome = () => {
           </View>
         </View>
         
-        <TouchableOpacity className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-5'>
+        <TouchableOpacity 
+          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-5'
+          onPress={() => router.push('/info')}
+        >
           <Text className='text-xl font-dm-semibold text-white'>get started</Text> 
         </TouchableOpacity> 
       </SafeAreaView>

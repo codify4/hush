@@ -40,6 +40,7 @@ export default function RootLayout() {
       <Stack>
         {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
         <Stack.Screen name="index" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="info" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="light" />
