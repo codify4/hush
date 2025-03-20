@@ -52,7 +52,7 @@ const InfoScreen = () => {
       });
       setCurrentIndex(currentIndex + 1);
     } else {
-      router.push('/');
+      router.push('/sign-in');
     }
   };
 
@@ -66,7 +66,7 @@ const InfoScreen = () => {
           backgroundColor: item.backgroundColor 
         }}
       >
-        <Text className="text-4xl font-dm-bold text-center text-[#121418] px-6">
+        <Text className="text-4xl font-dm-bold text-center text-dark px-6">
           {item.title}
         </Text>
         
@@ -78,7 +78,7 @@ const InfoScreen = () => {
         </Animated.View>
         
         <View className="px-10 items-center">
-          <Text className="text-xl font-dm-medium text-center text-[#121418] mb-10">
+          <Text className="text-xl font-dm-medium text-center text-dark mb-10">
             {item.description}
           </Text>
           
@@ -113,7 +113,7 @@ const InfoScreen = () => {
           <View
             key={index}
             className={`h-2 w-2 rounded-full mx-1 ${
-              currentIndex === index ? 'bg-[#121418]' : 'bg-[#121418] opacity-30'
+              currentIndex === index ? 'bg-dark' : 'bg-dark opacity-30'
             }`}
           />
         ))}

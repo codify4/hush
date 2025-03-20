@@ -8,7 +8,7 @@ module.exports = {
       colors: {
         "primary": "#A28BEE",
         "secondary": "#F1744C",
-        "bg": "#121418"
+        "dark": "#121418"
       },
       fontFamily: {
         'dm': ['DMSans-Regular'],

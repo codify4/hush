@@ -5,7 +5,7 @@ import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 
 const Welcome = () => {
   return (
-    <View className='flex-1 bg-bg'>
+    <View className='flex-1 bg-dark'>
       <StarryBackground />
       <SafeAreaView className='flex-1 items-center justify-between w-full'>
         <View></View>
@@ -23,7 +23,7 @@ const Welcome = () => {
         </View>
         
         <TouchableOpacity 
-          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-10'
+          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-6'
           onPress={() => router.push('/info')}
         >
           <Text className='text-xl font-dm-semibold text-white'>get started</Text> 
