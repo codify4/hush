@@ -23,7 +23,7 @@ const Welcome = () => {
         </View>
         
         <TouchableOpacity 
-          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-5'
+          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-10'
           onPress={() => router.push('/info')}
         >
           <Text className='text-xl font-dm-semibold text-white'>get started</Text> 
