@@ -84,7 +84,7 @@ const InfoScreen = () => {
           
           <TouchableOpacity
             onPress={handleNext}
-            className="bg-[#121418] rounded-full w-40 py-4 items-center"
+            className="bg-dark rounded-full w-80 py-5 items-center"
           >
             <Text className="text-white font-dm-semibold text-base">
               {currentIndex === onboardingData.length - 1 ? 'Get started' : 'Next'}
