@@ -12,7 +12,9 @@ import {
 import { ChevronRight } from 'lucide-react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Input from '@/components/input';
-const keyboardVerticalOffset = Platform.OS === "ios" ? 50 : 0
+import { router } from 'expo-router';
+
+const keyboardVerticalOffset = Platform.OS === "ios" ? 50 : 0;
 
 const SignInScreen = () => {
   const [email, setEmail] = useState('');
@@ -73,14 +75,14 @@ const SignInScreen = () => {
           }}
         >
           <View className="flex-1 items-center justify-center relative">
-              <View className="absolute z-10 top-0 left-0 right-0 bottom-0 bg-black/20"></View>
-              <Image source={require("@/assets/images/landscape.jpg")} className="size-full" resizeMode="cover" />
-              <Text className="z-50 text-white font-dm-bold text-7xl mb-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/3">hushhh</Text>
-              <View className="z-50 mb-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-5">
-                <Text className="text-white font-dm-semibold text-center text-2xl">
-                  Find your moment of peace
-                </Text>
-              </View>
+            <View className="absolute z-10 top-0 left-0 right-0 bottom-0 bg-black/20"></View>
+            <Image source={require("@/assets/images/landscape.jpg")} className="size-full" resizeMode="cover" />
+            <Text className="z-50 text-white font-dm-bold text-7xl mb-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/3">hushhh</Text>
+            <View className="z-50 mb-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-5">
+              <Text className="text-white font-dm-semibold text-center text-2xl">
+                Find your moment of peace
+              </Text>
+            </View>
           </View>
         </View>
 
@@ -88,42 +90,49 @@ const SignInScreen = () => {
         <View 
           className="flex-1 bg-dark rounded-t-[40px] px-8 pt-10 -mt-5" 
         >
-          {/* Email input */}
-          <View className="mb-5">
-            <Input 
-              mode="outlined" 
-              value={email} 
-              onChangeText={setEmail} 
-              placeholder="Email" 
-              focus={false} 
-              keyboardType="email-address"
-            />
+          <View className="space-y-4">
+            {/* Continue button - Primary action */}
+            <TouchableOpacity 
+              className="bg-secondary rounded-full py-5 px-6 flex-row items-center justify-between" 
+              activeOpacity={0.8}
+              onPress={() => router.push('/email-login')}
+            >
+              <Text className="font-dm-semibold text-lg text-white">Continue with email</Text>
+              <ChevronRight color="#fff" size={24}/>
+            </TouchableOpacity>
+
+            {/* Or divider */}
+            <View className="flex-row items-center justify-center py-2">
+              <View className="flex-1 h-[1px] bg-gray-700"></View>
+              <Text className="text-gray-400 font-dm-medium mx-4">or</Text>
+              <View className="flex-1 h-[1px] bg-gray-700"></View>
+            </View>
+
+            {/* Google Sign In button - Secondary action */}
+            <TouchableOpacity
+              className="rounded-full py-5 px-6 flex-row items-center justify-between border border-white/70"
+              activeOpacity={0.8}
+            >
+              <View className="flex-row items-center">
+                <FontAwesome name="google" size={20} color="#ffffff" />
+                <Text className="font-dm-semibold text-lg text-white ml-3">Sign in with Google</Text>
+              </View>
+              <View className="w-6"></View> {/* Spacer to balance the layout */}
+            </TouchableOpacity>
           </View>
 
-          {/* Continue button */}
-          <TouchableOpacity className="flex items-start bg-secondary rounded-full w-full py-5 px-5 mb-3" activeOpacity={0.8}>
-            <Text className="font-dm-semibold text-xl text-white">continue with email</Text>
-          </TouchableOpacity>
-
-          {/* Or divider */}
-          <View className="items-center mb-3">
-            <Text className="text-gray-400 font-dm">or</Text>
+          {/* Skip button - Tertiary action */}
+          <View className="flex-1 justify-end pb-8 pt-4">
+            {/* Skip button */}
+            <TouchableOpacity 
+              className="flex flex-row items-center justify-between border border-gray-300 rounded-full py-5 px-5 mb-5" 
+              activeOpacity={0.8} 
+              onPress={() => router.push('/onboarding')}
+            >
+              <Text className="font-dm-semibold text-lg text-white text-center">Skip for now</Text>
+              <ChevronRight color="#fff" size={24}/>
+            </TouchableOpacity>
           </View>
-
-          {/* Google Sign In button */}
-          <TouchableOpacity
-            className={`rounded-full py-5 flex-row items-center justify-start border border-white px-5 ${Platform.OS === 'ios' ? 'mb-7' : 'mb-5'}`}
-            activeOpacity={0.8}
-          >
-            <FontAwesome name="google" size={24} color="#ffffff" className="mr-2"/>
-            <Text className="font-dm-semibold text-lg text-white">Sign In with Google</Text>
-          </TouchableOpacity>
-
-          {/* Skip button */}
-          <TouchableOpacity className={`flex flex-row items-center justify-between border border-gray-300 rounded-full py-5 px-5 ${Platform.OS === 'ios' ? 'mt-12' : 'mt-0'}`} activeOpacity={0.8}>
-            <Text className="font-dm-semibold text-lg text-white text-center">Skip for now</Text>
-            <ChevronRight color="#fff"/>
-          </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
