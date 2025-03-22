@@ -64,19 +64,20 @@ const SignInScreen = () => {
       behavior={"padding"}
       keyboardVerticalOffset={keyboardVerticalOffset}
     >
-      <View className="flex-1 bg-primary">
+      <View className="flex-1 bg-dark">
         {/* Purple top section with extreme curve */}
         <View
-          className="justify-end pb-8"
+          className="justify-end"
           style={{
             height: "55%",
           }}
         >
-          <View className="flex-1 items-center justify-center">
-              <Image source={require("@/assets/icons/splash-icon-light.png")} className="size-[300px]" resizeMode="contain" />
-              <Text className="text-white font-dm-bold text-5xl mb-2">hushhh</Text>
-              <View className="mb-4">
-                <Text className="text-white font-dm-medium text-center text-lg">
+          <View className="flex-1 items-center justify-center relative">
+              <View className="absolute z-10 top-0 left-0 right-0 bottom-0 bg-black/20"></View>
+              <Image source={require("@/assets/images/landscape.jpg")} className="size-full" resizeMode="cover" />
+              <Text className="z-50 text-white font-dm-bold text-7xl mb-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-2/3">hushhh</Text>
+              <View className="z-50 mb-4 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 mt-5">
+                <Text className="text-white font-dm-semibold text-center text-2xl">
                   Find your moment of peace
                 </Text>
               </View>
@@ -85,7 +86,7 @@ const SignInScreen = () => {
 
         {/* Form section */}
         <View 
-          className="flex-1 bg-dark rounded-t-[40px] px-8 pt-10" 
+          className="flex-1 bg-dark rounded-t-[40px] px-8 pt-10 -mt-5" 
         >
           {/* Email input */}
           <View className="mb-5">
@@ -100,7 +101,7 @@ const SignInScreen = () => {
           </View>
 
           {/* Continue button */}
-          <TouchableOpacity className="flex items-start bg-primary rounded-full w-full py-5 px-5 mb-3" activeOpacity={0.8}>
+          <TouchableOpacity className="flex items-start bg-secondary rounded-full w-full py-5 px-5 mb-3" activeOpacity={0.8}>
             <Text className="font-dm-semibold text-xl text-white">continue with email</Text>
           </TouchableOpacity>
 
@@ -119,7 +120,7 @@ const SignInScreen = () => {
           </TouchableOpacity>
 
           {/* Skip button */}
-          <TouchableOpacity className={`flex flex-row items-center justify-between border border-gray-300 rounded-full py-5 px-5 ${Platform.OS === 'ios' ? 'mt-10' : 'mt-0'}`} activeOpacity={0.8}>
+          <TouchableOpacity className={`flex flex-row items-center justify-between border border-gray-300 rounded-full py-5 px-5 ${Platform.OS === 'ios' ? 'mt-12' : 'mt-0'}`} activeOpacity={0.8}>
             <Text className="font-dm-semibold text-lg text-white text-center">Skip for now</Text>
             <ChevronRight color="#fff"/>
           </TouchableOpacity>
