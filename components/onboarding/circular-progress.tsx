@@ -99,6 +99,7 @@ const CircularProgress = () => {
           >
             <Animated.Text 
               className="text-white text-5xl font-dm-bold"
+              style={{ fontSize: 48 }}
             >
               {displayedPercentage}%
             </Animated.Text>

@@ -82,8 +82,9 @@ export const OnboardingInput: React.FC<OnboardingInputProps> = ({
                         className={`px-5 py-5 mt-5 rounded-full ${
                             value === choice 
                                 ? 'bg-primary' 
-                                : 'border border-white bg-dar/50'
+                                : 'border border-white'
                         }`}
+                        style={{ borderColor: value === choice ? '' : '#fff' }}
                     >
                         <Text 
                             className={`text-lg font-dm-semibold ${
