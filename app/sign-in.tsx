@@ -3,9 +3,7 @@ import {
   View, 
   Text, 
   TouchableOpacity, 
-  Image, 
-  KeyboardAvoidingView,
-  Platform,
+  Image
 } from 'react-native';
 import { ChevronRight } from 'lucide-react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -44,7 +42,7 @@ const SignInScreen = () => {
             activeOpacity={0.8}
             onPress={() => router.push('/email-login')}
           >
-            <Text className="font-dm-semibold text-lg text-white">Continue with email</Text>
+            <Text className="font-dm-semibold text-lg text-white">continue with email</Text>
             <ChevronRight color="#fff" size={24}/>
           </TouchableOpacity>
           {/* Or divider */}
@@ -60,7 +58,7 @@ const SignInScreen = () => {
           >
             <View className="flex-row items-center">
               <FontAwesome name="google" size={20} color="#ffffff" />
-              <Text className="font-dm-semibold text-lg text-white ml-3">Sign in with Google</Text>
+              <Text className="font-dm-semibold text-lg text-white ml-3">sign in with Google</Text>
             </View>
             <View className="w-6"></View>
           </TouchableOpacity>
@@ -74,7 +72,7 @@ const SignInScreen = () => {
             activeOpacity={0.8} 
             onPress={() => router.push('/onboarding')}
           >
-            <Text className="font-dm-semibold text-lg text-white text-center">Skip for now</Text>
+            <Text className="font-dm-semibold text-lg text-white text-center">skip for now</Text>
             <ChevronRight color="#fff" size={24}/>
           </TouchableOpacity>
         </View>
