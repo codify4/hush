@@ -42,6 +42,9 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="info" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="sign-in" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="onboarding" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="loading-screen" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        <Stack.Screen name="email-login" options={{ headerShown: false, animation: 'slide_from_right' }} />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="light" />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { 
   View, 
   Text, 
@@ -6,60 +6,14 @@ import {
   Image, 
   KeyboardAvoidingView,
   Platform,
-  Animated,
-  Easing
 } from 'react-native';
 import { ChevronRight } from 'lucide-react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import Input from '@/components/input';
 import { router } from 'expo-router';
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 50 : 0;
 
 const SignInScreen = () => {
-  const [email, setEmail] = useState('');
-  
-  // Animation values
-  const logoOpacity = new Animated.Value(0);
-  const logoScale = new Animated.Value(0.8);
-  const contentTranslateY = new Animated.Value(20);
-  const contentOpacity = new Animated.Value(0);
-
-  useEffect(() => {
-    // Animate logo
-    Animated.sequence([
-      Animated.timing(logoOpacity, {
-        toValue: 1,
-        duration: 800,
-        useNativeDriver: true,
-        easing: Easing.out(Easing.ease),
-      }),
-      Animated.timing(logoScale, {
-        toValue: 1,
-        duration: 500,
-        useNativeDriver: true,
-        easing: Easing.out(Easing.back(1.5)),
-      }),
-    ]).start();
-
-    // Animate content with slight delay
-    Animated.parallel([
-      Animated.timing(contentOpacity, {
-        toValue: 1,
-        duration: 800,
-        delay: 400,
-        useNativeDriver: true,
-      }),
-      Animated.timing(contentTranslateY, {
-        toValue: 0,
-        duration: 800,
-        delay: 400,
-        useNativeDriver: true,
-        easing: Easing.out(Easing.ease),
-      }),
-    ]).start();
-  }, []);
-
   return (
     <KeyboardAvoidingView
       className="flex-1"
@@ -117,7 +71,7 @@ const SignInScreen = () => {
                 <FontAwesome name="google" size={20} color="#ffffff" />
                 <Text className="font-dm-semibold text-lg text-white ml-3">Sign in with Google</Text>
               </View>
-              <View className="w-6"></View> {/* Spacer to balance the layout */}
+              <View className="w-6"></View>
             </TouchableOpacity>
           </View>
 
