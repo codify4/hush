@@ -1,51 +1,49 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, Dimensions, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity, FlatList, Image, ImageSourcePropType } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import MeditationIllustration from '@/components/info/icons/meditation';
-import FocusIllustration from '@/components/info/icons/focus';
-import SleepIllustration from '@/components/info/icons/sleep';
 import { router } from 'expo-router';
+import { ChevronRight } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
-interface OnboardingItem {
+interface InfoItem {
   id: string;
   title: string;
   description: string;
-  backgroundColor: string;
-  illustration: React.ReactNode;
+  primaryColor: string;
+  illustration: ImageSourcePropType;
 }
 
 const InfoScreen = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
-  const onboardingData: OnboardingItem[] = [
+  const infoData: InfoItem[] = [
     {
       id: '1',
       title: 'Reduce Stress',
-      description: 'Find peace in your daily life with guided meditation',
-      backgroundColor: '#f1744c',
-      illustration: <MeditationIllustration />,
+      description: 'Find peace in your daily life with guided meditation sessions designed to calm your mind',
+      primaryColor: '#f1744c',
+      illustration: require("@/assets/images/meditation-man.jpg"),
     },
     {
       id: '2',
       title: 'Improve Focus',
-      description: 'Train your mind to stay present and focused',
-      backgroundColor: '#A28BEE',
-      illustration: <FocusIllustration />,
+      description: 'Train your mind to stay present and focused with mindfulness techniques that enhance concentration',
+      primaryColor: '#A28BEE',
+      illustration: require("@/assets/images/focus.jpg"),
     },
     {
       id: '3',
       title: 'Control Your Breathing',
-      description: 'Practice deep breathing exercises to improve your focus and relaxation',
-      backgroundColor: '#f1744c',
-      illustration: <SleepIllustration />,
+      description: 'Master breathing exercises that help reduce anxiety and improve your overall mental wellbeing',
+      primaryColor: '#f1744c',
+      illustration: require("@/assets/images/breathing.jpeg"),
     },
   ];
 
   const handleNext = () => {
-    if (currentIndex < onboardingData.length - 1) {
+    if (currentIndex < infoData.length - 1) {
       flatListRef.current?.scrollToIndex({
         index: currentIndex + 1,
         animated: true,
@@ -56,68 +54,76 @@ const InfoScreen = () => {
     }
   };
 
-  const renderItem = ({ item }: { item: OnboardingItem }) => {
+  const renderItem = ({ item, index }: { item: InfoItem; index: number }) => {
     return (
       <View 
-        className="flex-1 items-center justify-between py-32"
-        style={{ 
-          width, 
-          height: '100%',
-          backgroundColor: item.backgroundColor 
-        }}
+        className="flex-1 bg-[#121418]"
+        style={{ width }}
       >
-        <Text className="text-4xl font-dm-bold text-center text-dark px-6">
-          {item.title}
-        </Text>
-        
-        <Animated.View 
-          entering={FadeIn.duration(800)}
-          className="items-center justify-center"
-        >
-          {item.illustration}
-        </Animated.View>
-        
-        <View className="px-10 items-center">
-          <Text className="text-xl font-dm-medium text-center text-dark mb-10">
-            {item.description}
-          </Text>
+        {/* Top illustration section with colored background */}
+        <View className="relative h-[55%] overflow-hidden">
+          <View 
+            className="absolute rounded-full"
+            style={{
+              backgroundColor: item.primaryColor,
+              width: width * 1.5,
+              height: width * 1.5,
+              top: -width * 0.25,
+              left: -width * 0.25,
+            }}
+          />
           
-          <TouchableOpacity
-            onPress={handleNext}
-            className="bg-dark rounded-full w-80 py-5 items-center"
+          <Animated.View 
+            entering={FadeIn.duration(800)}
+            className="absolute top-0 left-0 right-0 bottom-0 items-center justify-center"
           >
-            <Text className="text-white font-dm-semibold text-base">
-              {currentIndex === onboardingData.length - 1 ? 'Get started' : 'Next'}
+            <Image 
+              source={item.illustration} 
+              className="size-full"
+              resizeMode="cover"
+            />
+          </Animated.View>
+        </View>
+        
+        {/* Content section */}
+        <View className="px-8 py-8 flex-1 justify-between">
+          <View>
+            <Text className="text-3xl font-dm-bold text-white mb-4">
+              {item.title}
             </Text>
-          </TouchableOpacity>
+            <Text className="text-base font-dm-medium text-white/80 mb-8">
+              {item.description}
+            </Text>
+          </View>
+          
+          <View className="flex-row justify-between items-center">
+            <View className="flex-row"></View>
+            
+            <TouchableOpacity
+              onPress={handleNext}
+              className="rounded-full p-5"
+              style={{ backgroundColor: item.primaryColor }}
+            >
+              <ChevronRight size={24} color="#fff" />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
   };
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-[#121418]">
       <FlatList
         ref={flatListRef}
-        data={onboardingData}
-        renderItem={renderItem}
+        data={infoData}
+        renderItem={({ item, index }) => renderItem({ item, index })}
         horizontal
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         scrollEnabled={false}
         keyExtractor={(item) => item.id}
       />
-      
-      <View className="absolute bottom-12 left-0 right-0 flex-row justify-center">
-        {onboardingData.map((_, index) => (
-          <View
-            key={index}
-            className={`h-2 w-2 rounded-full mx-1 ${
-              currentIndex === index ? 'bg-dark' : 'bg-dark opacity-30'
-            }`}
-          />
-        ))}
-      </View>
     </View>
   );
 };
