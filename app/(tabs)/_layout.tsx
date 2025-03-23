@@ -3,6 +3,7 @@ import { Tabs } from 'expo-router'
 import { Platform } from 'react-native'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import React from 'react'
+import FloatingTabBar from '@/components/floating-tab-bar';
 
 const TabsLayout = () => {
   return (
@@ -11,6 +12,7 @@ const TabsLayout = () => {
             headerShown: false,
             tabBarShowLabel: true,
             tabBarStyle: {
+                display: 'none',
                 backgroundColor: '#1E2130',
                 position: 'absolute',
                 borderTopColor: 'transparent',
@@ -25,6 +27,7 @@ const TabsLayout = () => {
                 fontFamily: 'DMSans-Regular',
             }
         }}
+        tabBar={(props) => <FloatingTabBar activeColor='#F1744C' inactiveColor='#fff' />}
     >
         <Tabs.Screen 
             name='meditate' 
@@ -47,7 +50,7 @@ const TabsLayout = () => {
         />
 
         <Tabs.Screen 
-            name='me' 
+            name='profile' 
             options={{
                 title: 'me',
                 tabBarIcon: ({ color, size }) => (
