@@ -24,7 +24,7 @@ const Welcome = () => {
         
         <TouchableOpacity 
           className='bg-secondary px-10 w-10/12 py-5 rounded-full'
-          onPress={() => router.push('/info')}
+          onPress={() => router.push('/(tabs)/meditate')}
         >
           <Text className='text-xl font-dm-semibold text-white'>get started</Text> 
         </TouchableOpacity> 
