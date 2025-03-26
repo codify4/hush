@@ -1,64 +1,79 @@
-import React, { useEffect, useRef, useCallback, useState } from "react";
-import { View, Text } from "react-native";
-import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg";
-import Animated, { 
-  useSharedValue, 
-  useAnimatedProps, 
-  withTiming, 
-  interpolate, 
+"use client"
+
+import { useEffect, useRef, useCallback, useState } from "react"
+import { View, Text } from "react-native"
+import Svg, { Circle, Defs, LinearGradient, Stop } from "react-native-svg"
+import Animated, {
+  useSharedValue,
+  useAnimatedProps,
+  withTiming,
+  interpolate,
   useAnimatedStyle,
   Easing,
   runOnJS,
-} from "react-native-reanimated";
-import * as Haptics from 'expo-haptics';
+} from "react-native-reanimated"
+import * as Haptics from "expo-haptics"
+import { router } from "expo-router"
 
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
 const CircularProgress = () => {
-  const progress = useSharedValue(0);
-  const opacity = useSharedValue(0);
-  const lastPercentage = useRef(0);
-  const [displayedPercentage, setDisplayedPercentage] = useState(0);
+  const progress = useSharedValue(0)
+  const opacity = useSharedValue(0)
+  const lastPercentage = useRef(0)
+  const [displayedPercentage, setDisplayedPercentage] = useState(0)
 
   const triggerHaptic = useCallback(() => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-  }, []);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+  }, [])
 
-  const checkAndTriggerHaptic = useCallback((currentValue: number) => {
-    const currentPercentage = Math.floor(currentValue);
-    if (currentPercentage !== lastPercentage.current) {
-      lastPercentage.current = currentPercentage;
-      triggerHaptic();
-      runOnJS(setDisplayedPercentage)(currentPercentage);
-    }
-  }, [triggerHaptic]);
+  const navigateToMeditate = useCallback(() => {
+    // Add a small delay before navigation for better UX
+    setTimeout(() => {
+      router.push("/(tabs)/meditate")
+    }, 500) // 500ms delay after reaching 100%
+  }, [])
+
+  const checkAndTriggerHaptic = useCallback(
+    (currentValue: number) => {
+      const currentPercentage = Math.floor(currentValue)
+      if (currentPercentage !== lastPercentage.current) {
+        lastPercentage.current = currentPercentage
+        triggerHaptic()
+        runOnJS(setDisplayedPercentage)(currentPercentage)
+      }
+    },
+    [triggerHaptic],
+  )
 
   useEffect(() => {
-    opacity.value = withTiming(1, { duration: 500 });
-    progress.value = withTiming(100, { 
-      duration: 3000,
-      easing: Easing.bezier(0.25, 0.1, 0.25, 1)
-    }, (finished) => {
-      if (finished) {
-        runOnJS(triggerHaptic)();
-      }
-    });
-  }, []);
+    opacity.value = withTiming(1, { duration: 500 })
+    progress.value = withTiming(
+      100,
+      {
+        duration: 3000,
+        easing: Easing.bezier(0.25, 0.1, 0.25, 1),
+      },
+      (finished) => {
+        if (finished) {
+          runOnJS(triggerHaptic)()
+          // Navigate to meditate screen when animation completes
+          runOnJS(navigateToMeditate)()
+        }
+      },
+    )
+  }, [])
 
   const animatedProps = useAnimatedProps(() => {
-    runOnJS(checkAndTriggerHaptic)(progress.value);
+    runOnJS(checkAndTriggerHaptic)(progress.value)
     return {
-      strokeDashoffset: interpolate(
-        progress.value,
-        [0, 100],
-        [251, 0]
-      ),
-    };
-  });
+      strokeDashoffset: interpolate(progress.value, [0, 100], [251, 0]),
+    }
+  })
 
   const contentStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
-  }));
+  }))
 
   return (
     <View className="flex-1 bg-dark items-center justify-center">
@@ -71,14 +86,7 @@ const CircularProgress = () => {
                 <Stop offset="1" stopColor="#F1744C" stopOpacity="1" />
               </LinearGradient>
             </Defs>
-            <Circle
-              cx="50"
-              cy="50"
-              r="40"
-              stroke="#1b1e24"
-              strokeWidth="10"
-              fill="none"
-            />
+            <Circle cx="50" cy="50" r="40" stroke="#1b1e24" strokeWidth="10" fill="none" />
             <AnimatedCircle
               cx="50"
               cy="50"
@@ -91,21 +99,15 @@ const CircularProgress = () => {
               strokeLinecap="round"
             />
           </Svg>
-          
+
           {/* Centered percentage text */}
-          <Animated.View 
-            style={contentStyle} 
-            className="absolute items-center justify-center"
-          >
-            <Animated.Text 
-              className="text-white text-5xl font-dm-bold"
-              style={{ fontSize: 48 }}
-            >
+          <Animated.View style={contentStyle} className="absolute items-center justify-center">
+            <Animated.Text className="text-white text-5xl font-dm-bold" style={{ fontSize: 48 }}>
               {displayedPercentage}%
             </Animated.Text>
           </Animated.View>
         </View>
-        
+
         <Animated.View style={contentStyle} className="items-center mt-6">
           <Text className="text-white text-2xl font-dm-semibold mb-2">
             {displayedPercentage === 100 ? "Done!" : "Calculating..."}
@@ -113,7 +115,7 @@ const CircularProgress = () => {
         </Animated.View>
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default CircularProgress;
+export default CircularProgress

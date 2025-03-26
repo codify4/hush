@@ -1,99 +1,103 @@
-// Define all shared types in a central location
-export type SlideType = "text" | "choice" | "date" | "number" | "measurement" | "loading" | "age";
+export type SlideType = "text" | "choice" | "date" | "number" | "measurement" | "loading" | "age"
 
 export interface OnboardingData {
-  goal: string;
-  gender: string;
-  frequency: string;
-  loading: string;
-  age: string;
+  goal: string
+  gender: string
+  frequency: string
+  loading: string
+  age: string
+}
+
+export interface ChoiceOption {
+  text: string
+  iconName: string
 }
 
 export interface Slide {
-  type: SlideType;
-  title: string;
-  field: keyof OnboardingData;
-  placeholder?: string;
-  choices?: string[];
-  min?: number;
-  max?: number;
-  validation: (value: string) => boolean;
+  type: SlideType
+  title: string
+  field: keyof OnboardingData
+  placeholder?: string
+  choices?: ChoiceOption[]
+  min?: number
+  max?: number
+  validation: (value: string) => boolean
 }
 
 export const slides: Slide[] = [
   {
-    type:'choice',
+    type: "choice",
     title: "Select your gender",
-    field: 'gender',
+    field: "gender",
     choices: [
-      "male",
-      "female",
-      "other"
+      { text: "male", iconName: "Mars" },
+      { text: "female", iconName: "Venus" },
     ],
-    validation: (value: string) => value.length > 0
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'age',
+    type: "age",
     title: "How old are you?",
-    field: 'age',
-    placeholder: "Enter your age", 
-    validation: (value: string) => value.length > 0
+    field: "age",
+    placeholder: "Enter your age",
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'choice',
+    type: "choice",
     title: "What brings you to hush?",
-    field: 'goal',
+    field: "goal",
     choices: [
-      "become happier",
-      "get over anxiety",
-      "reduce stress",
-      "build self-esteem",
+      { text: "become happier", iconName: "Smile" },
+      { text: "get over anxiety", iconName: "Brain" },
+      { text: "reduce stress", iconName: "HeartPulse" },
+      { text: "build self-esteem", iconName: "Award" },
     ],
-    validation: (value: string) => value.length > 0
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'choice',
+    type: "choice",
     title: "How often do you get stressed?",
-    field: 'goal',
+    field: "goal",
     choices: [
-      "very often",
-      "sometimes",
-      "rarely",
-      "never"
+      { text: "very often", iconName: "Clock" },
+      { text: "sometimes", iconName: "HelpCircle" },
+      { text: "rarely", iconName: "CheckCircle2" },
+      { text: "never", iconName: "XCircle" },
     ],
-    validation: (value: string) => value.length > 0
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'choice',
+    type: "choice",
     title: "Does stress ever make it hard to breathe?",
-    field: 'goal',
+    field: "goal",
     choices: [
-      "yes",
-      "sometimes",
-      "no",
+      { text: "yes", iconName: "CheckCircle2" },
+      { text: "sometimes", iconName: "HelpCircle" },
+      { text: "no", iconName: "XCircle" },
     ],
-    validation: (value: string) => value.length > 0
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'choice',
+    type: "choice",
     title: "How often do u struggle with anxiety?",
-    field: 'frequency',
+    field: "frequency",
     choices: [
-      "very often",
-      "sometimes",
-      "rarely",
-      "never"
+      { text: "very often", iconName: "Clock" },
+      { text: "sometimes", iconName: "HelpCircle" },
+      { text: "rarely", iconName: "CheckCircle2" },
+      { text: "never", iconName: "XCircle" },
     ],
-    validation: (value: string) => value.length > 0
+    validation: (value: string) => value.length > 0,
   },
   {
-    type: 'choice',
+    type: "choice",
     title: "Have you ever tried meditation apps before?",
-    field: 'frequency',
+    field: "frequency",
     choices: [
-      "yes",
-      "no"
+      { text: "yes", iconName: "CircleCheckBig" },
+      { text: "no", iconName: "XCircle" },
     ],
-    validation: (value: string) => value.length > 0
-  }
-];
+    validation: (value: string) => value.length > 0,
+  },
+]
+

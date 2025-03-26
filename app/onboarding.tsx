@@ -78,7 +78,7 @@ const Onboarding = () => {
           exiting={slideDirection === "forward" ? SlideOutLeft.duration(300) : SlideOutRight.duration(300)}
           className="flex-1"
         >
-          <View className="flex-1 space-y-8 mt-24">
+          <View className="flex-1 space-y-8">
             <Text className="text-white text-4xl tracking-wider mb-3 font-dm-semibold">{currentSlide.field !== "loading" && currentSlide.title}</Text>
 
             <OnboardingInput slide={currentSlide} value={currentValue} onChangeText={handleInputChange} />

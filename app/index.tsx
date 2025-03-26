@@ -23,8 +23,8 @@ const Welcome = () => {
         </View>
         
         <TouchableOpacity 
-          className='bg-secondary px-10 w-10/12 py-5 rounded-full'
-          onPress={() => router.push('/(tabs)/meditate')}
+          className='bg-secondary px-10 w-10/12 py-5 rounded-full mb-5'
+          onPress={() => router.push('/onboarding')}
         >
           <Text className='text-xl font-dm-semibold text-white'>get started</Text> 
         </TouchableOpacity> 
