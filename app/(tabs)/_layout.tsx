@@ -1,6 +1,6 @@
-import { Wind, CircleUserRound } from 'lucide-react-native'
-import { Tabs } from 'expo-router'
-import { Platform } from 'react-native'
+import { Wind, CircleUserRound, ChevronLeft } from 'lucide-react-native'
+import { router, Tabs } from 'expo-router'
+import { Platform, TouchableOpacity } from 'react-native'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import React from 'react'
 import FloatingTabBar from '@/components/floating-tab-bar';
@@ -101,7 +101,7 @@ const TabsLayout = () => {
                 </TouchableOpacity>
                 ),
             }}
-        />
+        /> */}
         <Tabs.Screen 
             name='(settings)/settings' 
             options={{
@@ -109,7 +109,7 @@ const TabsLayout = () => {
                 title: 'Settings',
                 headerShown: true,
                 headerStyle: {
-                    backgroundColor: '#000000',
+                    backgroundColor: '#121418',
                 },
                 headerTitleStyle: {
                     color: '#fff',
@@ -123,7 +123,7 @@ const TabsLayout = () => {
                 </TouchableOpacity>
                 ),
             }}
-        /> */}
+        />
 
     </Tabs>
   )
